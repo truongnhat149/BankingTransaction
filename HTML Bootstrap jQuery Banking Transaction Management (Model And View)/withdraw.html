@@ -1,0 +1,79 @@
+<head >
+    <title>Withdraw</title>
+    <!-- <th:block th:replace="~{/layout/header :: header"></th:block> -->
+   
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/font/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/bootstap.css">
+    <link rel="stylesheet" href="assets/font/fontawesome-free-6.1.1-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/swetalert2.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="table-title mb-4">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2>Withdraw money from the customer's account</h2>
+                </div>
+                <div class="col-sm-4">
+                    <a href="/list_customer.html" class="btn btn-outline-light"><i class="fa fa-list" aria-hidden="true"></i> <span>Customer list</span></a>
+                </div>
+            </div>
+        </div>
+        <form id="frmWithdraw" method="post" >
+            <fieldset class="row g-3">
+                <div class="mb-3 col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-form-label">Customer ID</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" readonly id="customerId" name="customerId"  />
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-form-label">Full Name</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" readonly id="fullName" name="fullName"  />
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-form-label">Current balance ($)</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control num-space" readonly id="balance" name="balance"  />
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-form-label">Transaction Amount ($)</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control num-space" maxlength="14" id="transactionAmount" name="transactionAmount"  />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3 col-md-12">
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn btn-outline-warning">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                 Withdraw
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+</html>
