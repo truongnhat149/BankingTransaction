@@ -17,7 +17,7 @@ public class Customer {
     private String phone;
     private String address;
     private long balance = 0;
-    private boolean isSupended = false;
+    private boolean suspended = false;
     private LocalDateTime create_at = LocalDateTime.now();
 
     @OneToMany(targetEntity = Deposit.class, mappedBy = "customer")
@@ -34,14 +34,24 @@ public class Customer {
 
     public Customer() {}
 
-    public Customer(Long id, String fullName, String email, String phone, String address, long balance, boolean isSupended, LocalDateTime create_at, List<Deposit> deposits, List<Withdraw> withdraws, List<Transfer> senders, List<Transfer> recipients) {
+    public Customer(Long id, String fullName, String email, String phone, String address, long balance, boolean suspended) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.balance = balance;
-        this.isSupended = isSupended;
+        this.suspended = suspended;
+    }
+
+    public Customer(Long id, String fullName, String email, String phone, String address, long balance, boolean suspended, LocalDateTime create_at, List<Deposit> deposits, List<Withdraw> withdraws, List<Transfer> senders, List<Transfer> recipients) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.balance = balance;
+        this.suspended = suspended;
         this.create_at = create_at;
         this.deposits = deposits;
         this.withdraws = withdraws;
@@ -97,13 +107,7 @@ public class Customer {
         this.balance = balance;
     }
 
-    public boolean isSupended() {
-        return isSupended;
-    }
 
-    public void setSupended(boolean supended) {
-        isSupended = supended;
-    }
 
     public LocalDateTime getCreate_at() {
         return create_at;
@@ -143,5 +147,13 @@ public class Customer {
 
     public void setRecipients(List<Transfer> recipients) {
         this.recipients = recipients;
+    }
+
+    public boolean isSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        this.suspended = suspended;
     }
 }

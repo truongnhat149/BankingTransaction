@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Customer List</title>
-    <th:block th:replace="~{/layout/header :: header}"></th:block>
+    <th:block th:replace="~{/layout/header ::header}"></th:block>
 </head>
 <body>
 
@@ -34,19 +34,19 @@
             <th>Balance</th>
             <th colspan="5">Action</th>
         </tr>
-
         <th:block th:each="customer ,iterStat : ${customers}">
-            <tr role="row" th:class="${iterStat.odd}? 'odd':'even'">
+            <tr role="row" th:class="${iterStat.odd} ? 'odd':'even'">
                 <td th:text="${customer.id}"></td>
                 <td th:text="${customer.fullName}"></td>
                 <td th:text="${customer.email}"></td>
                 <td th:text="${customer.phone}"></td>
                 <td th:text="${customer.address}"></td>
                 <td th:text="${customer.balance}" style="text-align: right"></td>
+
                 <td>
                     <a class="btn btn-outline-secondary"
                        data-toggle="tooltip" data-placement="top" title="Edit"
-                       th:href="@{/edit-customer/__${customer.id}__}">
+                       th:href="@{/edit-customer/__${customer.id}__ }">
                         <i class="far fa-edit"></i>
                     </a>
                 </td>
@@ -80,7 +80,7 @@
         <a th:href="@{'/customers'(page=${customers.number + 1})}" th:if="${customers.hasNext()}">Next</a>
     </div>
 </div>
-<th:block th:replace="~{/layout/script :: script_all}"></th:block>
+<th:block th:replace="~{/layout/script:: script_all}"></th:block>
 </body>
 </html>
 

@@ -3,7 +3,7 @@
 <head>
 
     <title>Edit customer</title>
-    <th:block th:replace="~{/layout/head-crud::head}"></th:block>
+    <th:block th:replace="~{/layout/header-crud :: head}"></th:block>
 </head>
 <body>
 <div class="container">
@@ -54,10 +54,10 @@
         </div>
         <input th:type="hidden" name="balance" th:field="*{balance}">
         <input th:type="hidden" name="datetime" th:field="*{create_at}">
-        <input th:type="hidden" name="status" th:field="*{supended}">
+        <input th:type="hidden" name="status" th:field="*{suspended}">
     </form>
     <div class="row">
-        <footer>
+        <footer style="position: fixed; bottom: 0">
             <th:block th:if="${message}">
                 <div class="bg-success p-2 text-white"><span th:text="${message}"></span></div>
             </th:block>
@@ -69,6 +69,6 @@
 </div>
 
 
-<th:block th:replace="~{/layout/script::script_all}"></th:block>
+<th:block th:replace="~{/layout/script :: script_all}"></th:block>
 </body>
 </html>

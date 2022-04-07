@@ -34,7 +34,7 @@ public class CustomerService implements ICustomerService {
     @Override
     public void remove(Long id) {
         Customer customer = findById(id).get();
-        customer.setSupended(true);
+        customer.setSuspended(true);
         save(customer);
     }
 
@@ -52,4 +52,5 @@ public class CustomerService implements ICustomerService {
     public Iterable<Customer> findAllByIdIsNot(Long id) {
         return customerRepository.findAllByIdIsNot(id);
     }
+
 }

@@ -14,4 +14,5 @@ public interface ICustomerService extends IGeneralService<Customer> {
     List<Customer> findAllNotId(Long id);
 
     Iterable<Customer> findAllByIdIsNot(Long id);
+
 }

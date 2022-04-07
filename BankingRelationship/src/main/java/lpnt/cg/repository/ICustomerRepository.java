@@ -15,4 +15,5 @@ public interface ICustomerRepository extends JpaRepository<Customer, Long> {
     List<Customer> findAllNotId(@Param("id") Long id);
 
     Iterable<Customer> findAllByIdIsNot(Long id);
+
 }
