@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer money Information</title>
+    <th:block th:replace="~{/layout/head_crud::head}"></th:block>
+</head>
+<body>
+<div class="container">
+    <div class="row" id="header">
+        <div class="col-sm-8">
+            <h1>Transfer money Information</h1>
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-outline-light" style="float: right;"
+                    onclick="window.location.href='/customers'">
+                <i class="fa fa-list"></i>
+                <span>Customers List</span>
+            </button>
+        </div>
+    </div>
+
+    <!--/*@thymesVar id="transfer" type="java"*/-->
+    <form th:action="@{/transfer}" th:object="${transfer}" method="post">
+        <div class="row">
+            <div class="col-md-3">
+                <label class="form-label">Sender ID</label>
+                <input type="text" class="form-control" id="id" name="id"
+                       th:field="*{idSender}" readonly>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Sender Name</label>
+                <input type="text" class="form-control" id="fullName" name="fullName"
+                       th:value="${customer_sender.getFullName()}" readonly>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email"
+                       th:value="${customer_sender.getEmail()}" readonly>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Sender Balance (VND)</label>
+                <input type="number" class="form-control" id="balanceSender" name="balanceSender"
+                       th:value="${customer_sender.getBalance()}" readonly>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Recipient ID</label>
+                <select name="idRecipient" id="idRecipient" class="form-select" aria-label="Default select example"
+                        th:field="*{idRecipient}">
+                    <option value="0" selected>Select Recipient ID</option>
+                    <th:block th:each="customer: ${customersList}">
+                        <!--/*@thymesVar id="getId" type="java"*/-->
+                        <option th:value="${customer.getId()}">
+                            (<span th:text="${customer.getId()}"></span>)<span
+                                th:text="${customer.getFullName()}"></span>
+                        </option>
+                    </th:block>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Transfer Amount(VND)</label>
+                <input type="number" class="form-control" id="transferAmount" name="transferAmount"
+                       th:field="*{transferAmount}" th:onkeyup="onChange()">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Fees(%)</label>
+                <input type="text" class="form-control" id="fees" name="fees"
+                       th:field="*{fees}" readonly>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Total amount(VND)</label>
+                <input type="number" class="form-control" id="totalAmount" name="totalAmount"
+                       value="0" th:field="*{transaction_amount}" readonly>
+            </div>
+            <div class="col-md-12">
+                <br>
+                <button type="submit" id="btnCreateCustomer" class="btn btn-outline-primary">
+                    <i class="fas fa-exchange-alt"></i>
+                    Transfer
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <footer>
+            <th:block th:if="${success}">
+                <div class="bg-success p-2 text-white"><span th:text="${success}"></span></div>
+            </th:block>
+            <th:block th:if="${error}">
+                <div class="bg-danger bg-gradient p-2 text-white"><span th:text="${error}"></span></div>
+            </th:block>
+        </footer>
+    </div>
+</div>
+
+<th:block th:replace="~{/layout/script::script_all}"></th:block>
+</body>
+</html>
+<script>
+    function onChange() {
+        let transferAmount = document.getElementById("transferAmount").value
+        let fees = document.getElementById("fees").value
+        document.getElementById("totalAmount").value = transferAmount*fees /100
+    }
+</script>

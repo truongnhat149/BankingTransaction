@@ -1,1 +1,12 @@
 # BankingTransfer
+
+## Các kiến thức áp dụng
+- Bootstrap 
+- Spring MVC
+- Spring jpa repository
+- 
+
+## Kết quả đạt được
+- Thiết kế giao diện theo RWD
+- Ứng dụng có thể thêm, sửa, xóa người dùng
+- Ứng dụng có thể chuyển tiền giữa 2 người dùng
