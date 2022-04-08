@@ -1,10 +1,10 @@
-# BankingTransfer
+# BankingTransaction
 
-## Các kiến thức áp dụng
+## Các kiến thức + công nghệ
 - Bootstrap 
 - Spring MVC
 - Spring jpa repository
-- 
+- Thymeleaf
 
 ## Kết quả đạt được
 - Thiết kế giao diện theo RWD

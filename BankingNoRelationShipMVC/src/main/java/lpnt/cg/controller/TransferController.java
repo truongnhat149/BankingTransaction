@@ -62,20 +62,32 @@ public class TransferController {
                 customerListRecipient.add(c);
             }
         }
+
         ModelAndView modelAndView = new ModelAndView("/transaction/transfer");
 
         boolean isTrue;
         boolean isLimit = false;
-        if(balance_sender>= totalMoneyTransfer){
+
+        if(balance_sender >= totalMoneyTransfer){
             isLimit = true ;
+        } else {
+            modelAndView.addObject("error", " Transfer amount is not enough !");
         }
+
         boolean isMoney = false;
-        if(transfer.getTransferAmount() >= 1000 && transfer.getTransferAmount()<100000*100000){
+
+        if(transfer.getTransferAmount() >= 1000 && transfer.getTransferAmount() < 100000*100000){
             isMoney= true ;
+        } else {
+            modelAndView.addObject("error", "Money transfer limit must be from");
         }
+
         boolean isIdRecipient = false ;
-        if(customer_recipient!=null){
-            isIdRecipient= true ;
+
+        if(customer_recipient != null){
+            isIdRecipient = true ;
+        } else {
+            modelAndView.addObject("error","recipient id not available");
         }
 //        boolean isNotnull = false ;
 //        if(transfer.getTransferAmount() != 0){
