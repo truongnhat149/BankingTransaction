@@ -4,11 +4,17 @@ import lpnt.cg.model.Customer;
 import lpnt.cg.service.customer.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class CustomerController {
@@ -33,13 +39,27 @@ public class CustomerController {
 
 
     @PostMapping("/create-customer")
-    public ModelAndView saveCustomer(@ModelAttribute Customer customer) {
-        customerService.save(customer);
-
+    public ModelAndView saveCustomer(@Validated @ModelAttribute Customer customer,
+                                    BindingResult bindingResult) throws Exception {
         ModelAndView modelAndView = new ModelAndView("/customer/create");
-        modelAndView.addObject("customer", new Customer());
-        modelAndView.addObject("message", "New Customer created successfully");
-        return modelAndView;
+        String error = null;
+        if (bindingResult.hasFieldErrors()) {
+            List<ObjectError> errorList = bindingResult.getAllErrors();
+            error = "New customer create error " + "\n";
+            for (int i = 0; i < errorList.size(); i++) {
+                error += "*" + errorList.get(i).getDefaultMessage() + "\n";
+            }
+            modelAndView.addObject("error", error);
+        }
+        try {
+            customerService.save(customer);
+            modelAndView.addObject("customer", new Customer());
+            modelAndView.addObject("message", "New Customer created successfully");
+            return modelAndView;
+        } catch (Exception e) {
+            modelAndView.addObject("error", error);
+            return modelAndView;
+        }
     }
 
     @GetMapping("/edit-customer/{id}")

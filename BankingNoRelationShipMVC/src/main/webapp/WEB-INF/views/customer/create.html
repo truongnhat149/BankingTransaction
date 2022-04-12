@@ -26,16 +26,19 @@
                 <label class="form-label">Full name</label>
                 <input type="text" class="form-control" id="fullName" name="fullName"
                        th:field="*{fullName}">
+<!--                <th:block th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></th:block>-->
             </div>
             <div class="col-md-6">
                 <label class="form-label">Email</label>
                 <input type="text" class="form-control" id="email" name="email"
                        th:field="*{email}">
+<!--                <th:block th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></th:block>-->
             </div>
             <div class="col-md-6">
                 <label class="form-label">Phone</label>
                 <input type="text" class="form-control" id="phone" name="phone"
                        th:field="*{phone}">
+<!--                <th:block th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></th:block>-->
             </div>
             <div class="col-md-6">
                 <label class="form-label">Address</label>

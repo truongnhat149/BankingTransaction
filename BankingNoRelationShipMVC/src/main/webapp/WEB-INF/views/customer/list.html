@@ -11,7 +11,7 @@
         <tr>
             <td style="width: 60%;"><h1 style="color: white">List of customers</h1></td>
             <td style="width: 40%;">
-                <button type="button" class="btn btn-outline-light" onclick="window.location.href='/history-transfer'">
+                <button type="button" class="btn btn-outline-light" onclick="window.location.href='/history-transfers'">
                     <i class="fa fa-history"></i>
                     <span> Transfer money information</span>
                 </button>
@@ -35,7 +35,7 @@
             <th colspan="5">Action</th>
         </tr>
         <th:block th:each="customer ,iterStat : ${customers}">
-            <tr role="row" th:class="${iterStat.odd}? 'odd':'even'">
+            <tr role="row" th:class="${iterStat.odd} ? 'odd':'even'">
                 <!--/*@thymesVar id="id" type="java"*/-->
                 <td th:text="${customer.id}"></td>
                 <td th:text="${customer.fullName}"></td>
