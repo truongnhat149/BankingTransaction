@@ -12,7 +12,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    implementation 'org.projectlombok:lombok:1.18.20'
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     implementation group: 'org.springframework', name: 'spring-core', version: '5.3.2'
     implementation group: 'org.springframework', name: 'spring-context', version: '5.3.2'
     implementation group: 'org.springframework', name: 'spring-beans', version: '5.3.2'
@@ -25,6 +26,13 @@ dependencies {
     implementation group: 'org.springframework', name: 'spring-orm', version: '5.3.2'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
     implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.4.2'
+
+// https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+// https://mvnrepository.com/artifact/commons-logging/commons-logging
+    implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.10.Final'
 }
 
 test {

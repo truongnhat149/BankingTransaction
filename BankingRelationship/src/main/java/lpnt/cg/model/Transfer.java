@@ -1,6 +1,7 @@
 package lpnt.cg.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,6 +20,7 @@ public class Transfer {
     @JoinColumn(name = "recipient_id", referencedColumnName = "id")
     private Customer recipient;
 
+    @Min(value = 1000, message = "transfer amount not min 1000$")
     private long transferAmount;
 
     private long fees;
@@ -39,7 +41,8 @@ public class Transfer {
 
     public Transfer() {}
 
-    public Transfer(Long id, Customer sender, Customer recipient, long transferAmount, long fees, long feesAmount, long transactionAmount, boolean isSuspended, LocalDateTime create_at, Long create_by, LocalDateTime update_at, Long update_by) {
+    public Transfer(Long id, Customer sender, Customer recipient,
+                    @Min(value = 1000, message = "transfer amount not min 1000$")long transferAmount, long fees, long feesAmount, long transactionAmount, boolean isSuspended, LocalDateTime create_at, Long create_by, LocalDateTime update_at, Long update_by) {
         this.id = id;
         this.sender = sender;
         this.recipient = recipient;
@@ -54,7 +57,8 @@ public class Transfer {
         this.update_by = update_by;
     }
 
-    public Transfer(Long id, Customer sender, Customer recipient, long transferAmount, long fees, long feesAmount, long transactionAmount, boolean isSuspended, LocalDateTime create_at) {
+    public Transfer(Long id, Customer sender, Customer recipient,
+                    @Min(value = 1000, message = "transfer amount not min 1000$")long transferAmount, long fees, long feesAmount, long transactionAmount, boolean isSuspended, LocalDateTime create_at) {
         this.id = id;
         this.sender = sender;
         this.recipient = recipient;

@@ -1,11 +1,21 @@
 package lpnt.cg.model;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "deposits")
 public class Deposit {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,6 +24,9 @@ public class Deposit {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
+
+    @Min(value = 1000, message = "Amount not min 1000$")
+    @Max(value = 10000000000L, message = "Amount not max 10000000000$")
     private long amount;
 
     private boolean isSuspended = false;
@@ -28,7 +41,10 @@ public class Deposit {
 
     public  Deposit() {}
 
-    public Deposit(Long id, Customer customer, long amount, boolean isSuspended, LocalDateTime create_at) {
+    public Deposit(Long id, Customer customer,
+
+                   @Min(value = 1000, message = "Amount not min 1000$")
+                   @Max(value = 10000000000L, message = "Amount not max 10000000000$") long amount, boolean isSuspended, LocalDateTime create_at) {
         this.id = id;
         this.customer = customer;
         this.amount = amount;
@@ -36,7 +52,10 @@ public class Deposit {
         this.create_at = create_at;
     }
 
-    public Deposit(Long id, Customer customer, long amount, boolean isSuspended, LocalDateTime create_at, Long create_by, LocalDateTime update_at, Long updated_by) {
+    public Deposit(Long id, Customer customer,
+                   @NotEmpty(message = "Amount not empty")
+                   @Min(value = 1000, message = "Amount not min 1000$")
+                   @Max(value = 10000000000L, message = "Amount not max 10000000000$") long amount, boolean isSuspended, LocalDateTime create_at, Long create_by, LocalDateTime update_at, Long updated_by) {
         this.id = id;
         this.customer = customer;
         this.amount = amount;

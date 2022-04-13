@@ -36,13 +36,5 @@ public class DepositService implements IDepositService {
         depositRepository.save(deposit);
     }
 
-//    @Override
-//    public Page<Deposit> findAll(Pageable pageable) {
-//        return depositRepository.findAll();
-//    }
 
-    @Override
-    public List<Deposit> findAllNotId(Long id) {
-        return depositRepository.findAllNotId(id);
-    }
 }

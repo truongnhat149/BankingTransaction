@@ -56,6 +56,14 @@
     </form>
 </div>
 
+<div class="row">
+    <footer style="position: fixed; bottom: 0">
+
+        <th:block  th:if="${error}">
+            <div class="bg-danger bg-gradient p-2 text-white"><span th:text="${error}"></span></div>
+        </th:block>
+    </footer>
+</div>
 
 <th:block th:replace="~{/layout/script::script_all}"></th:block>
 </body>

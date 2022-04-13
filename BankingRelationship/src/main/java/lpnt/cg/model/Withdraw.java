@@ -1,8 +1,16 @@
 package lpnt.cg.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
+
+@Getter
+@Setter
 @Entity
 @Table(name = "withdraws")
 public class Withdraw {
@@ -15,6 +23,8 @@ public class Withdraw {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
+    @Min(value = 1000, message = "Withdraw not min 1000$")
+    @Max(value = 100000000000L, message = "Withdraw not max 100000000000$")
     private long amount;
 
     private boolean isSuspended = false;
@@ -29,7 +39,9 @@ public class Withdraw {
 
     public Withdraw() {}
 
-    public Withdraw(Long id, Customer customer, long amount, boolean isSuspended, LocalDateTime create_at, Long create_by, LocalDateTime update_at, Long update_by) {
+    public Withdraw(Long id, Customer customer,
+                    @Min(value = 1000, message = "Withdraw not min 1000$")
+                    @Max(value = 100000000000L, message = "Withdraw not max 100000000000$")long amount, boolean isSuspended, LocalDateTime create_at, Long create_by, LocalDateTime update_at, Long update_by) {
         this.id = id;
         this.customer = customer;
         this.amount = amount;
@@ -40,7 +52,9 @@ public class Withdraw {
         this.update_by = update_by;
     }
 
-    public Withdraw(Long id, Customer customer, long amount, boolean isSuspended, LocalDateTime create_at) {
+    public Withdraw(Long id, Customer customer,
+                    @Min(value = 1000, message = "Withdraw not min 1000$")
+                    @Max(value = 100000000000L, message = "Withdraw not max 100000000000$")long amount, boolean isSuspended, LocalDateTime create_at) {
         this.id = id;
         this.customer = customer;
         this.amount = amount;

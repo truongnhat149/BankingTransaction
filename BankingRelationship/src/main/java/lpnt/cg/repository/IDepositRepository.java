@@ -11,8 +11,4 @@ import java.util.List;
 @Repository
 public interface IDepositRepository extends JpaRepository<Deposit, Long> {
 
-    @Query(value = "SELECT d FROM Deposit AS d WHERE d.id = :id")
-    List<Deposit> findAllNotId(@Param("id") Long id);
-
-    Iterable<Deposit> findAllByIdIsNot(Long id);
 }

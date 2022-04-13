@@ -5,14 +5,13 @@ import lpnt.cg.service.IGeneralService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface ICustomerService extends IGeneralService<Customer> {
 
     Page<Customer> findAll(Pageable pageable);
 
-    List<Customer> findAllNotId(Long id);
+    Page<Customer> findAllNoSuspended(Pageable pageable);
 
-    Iterable<Customer> findAllByIdIsNot(Long id);
+    Iterable<Customer> findAllByIdIsSuspended(Long id);
 
 }

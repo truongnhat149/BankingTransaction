@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>List Transfers Information</title>
-    <th:block th:replace="~{/layout/head::head}"></th:block>
+    <th:block th:replace="~{/layout/header::header}"></th:block>
 
 </head>
 <body>
@@ -34,29 +34,19 @@
             </tr>
             <th:block th:each="transfer, iterStat : ${transfers}">
                 <tr>
-                    <td th:text="${iterStat.count}" ></td>
-                    <!--                    <td class="id" th:text="${transfer.id}"></td>-->
-                    <td class="id_sender" th:text="${transfer.idSender}" style="text-align: center"></td>
-                    <td class="name_sender">
-                        <th:block th:each="customer: ${customersList}">
-                            <span th:if="${transfer.getIdSender() == customer.getId()}">
-                                <span th:text="${customer.getFullname()}"></span>
-                            </span>
-                        </th:block>
+<!--                    <td th:text="${iterStat.count}" ></td>-->
+                    <!--/*@thymesVar id="transfer" type="java"*/-->
+                    <td class="id" th:text="${transfer.id}"></td>
+                    <td class="id_sender" th:text="${transfer.sender.id}" style="text-align: center"></td>
+                    <td class="name_sender" th:text="${transfer.sender.fullName}">
                     </td>
-                    <td class="id_recipient" th:text="${transfer.idRecipient}" style="text-align: center"></td>
-                    <td class="name_recipient">
-                        <th:block th:each="customer: ${customersList}">
-                            <span th:if="${transfer.getIdRecipient() == customer.getId()}">
-                                <span th:text="${customer.getFullname()}"></span>
-                            </span>
-                        </th:block>
-                    </td>
+                    <td class="id_recipient" th:text="${transfer.recipient.id}" style="text-align: center"></td>
+                    <td class="name_recipient" th:text="${transfer.recipient.fullName}"></td>
                     <td class="t_amount"
                         th:text="${transfer.transferAmount}" style="text-align: right">
                     </td>
                     <td class="fees" th:text="${transfer.fees}" style="text-align: center"></td>
-                    <td class="fees_amount" th:text="${transfer.transaction_amount}" style="text-align: right">
+                    <td class="fees_amount" th:text="${transfer.feesAmount}" style="text-align: right">
                     </td>
                 </tr>
             </th:block>
