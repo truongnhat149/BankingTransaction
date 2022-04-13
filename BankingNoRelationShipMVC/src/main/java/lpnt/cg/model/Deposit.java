@@ -2,6 +2,8 @@ package lpnt.cg.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,6 +16,8 @@ public class Deposit {
 
     private Long idOwner;
 
+    @Min(value = 1000, message = "Deposit not min 1000")
+    @Max(value = 10000000000L, message = "Deposit not max 10000000000L")
     private long amount;
 
     private boolean isDelete = false;
@@ -31,7 +35,9 @@ public class Deposit {
         this.amount = amount;
     }
 
-    public Deposit(Long id, Long idOwner, long amount, boolean isDelete, LocalDateTime dateTime) {
+    public Deposit(Long id, Long idOwner,
+                   @Min(value = 1000, message = "Deposit not min 1000")
+                   @Max(value = 10000000000L, message = "Deposit not max 10000000000L")long amount, boolean isDelete, LocalDateTime dateTime) {
         this.id = id;
         this.idOwner = idOwner;
         this.amount = amount;

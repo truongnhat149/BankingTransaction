@@ -1,6 +1,7 @@
 package lpnt.cg.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,10 +16,12 @@ public class Transfer {
 
     private Long idRecipient;
 
+    @Min(value = 1000, message = "transfer min 1000$")
     private long transferAmount;
 
     private long fees;
 
+//    @Min(value = 1000, message = "transfer min 1000$")
     private long transaction_amount;
 
     private boolean isDelete = false;
@@ -27,7 +30,9 @@ public class Transfer {
 
     public Transfer() {}
 
-    public Transfer(Long idSender, Long idRecipient, Long transferAmount) {
+    public Transfer(Long idSender, Long idRecipient,
+                    @Min(value = 1000, message = "Transfer min 1000$") Long transferAmount
+                    ) {
         this.idSender = idSender;
         this.idRecipient = idRecipient;
         this.transferAmount = transferAmount;

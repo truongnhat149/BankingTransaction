@@ -24,7 +24,7 @@ public class Customer {
     private Long id;
 
     @NotEmpty(message = "fullName not empty")
-    @Size(min = 20, max = 100)
+    @Size(min = 10, max = 100)
     private String fullName;
 
     @Pattern(regexp = "(^$|[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$)",
@@ -36,7 +36,7 @@ public class Customer {
             message = "SDT gom 10 chu so, 0987654321")
     private String phone;
 
-    @Size(min = 1, max = 255, message = "Address description within 255 character")
+    
     private String address;
 
     private long balance = 0;
@@ -60,12 +60,12 @@ public class Customer {
 
     public Customer(Long id,
                     @NotEmpty(message = "fullName not null")
-                    @Size(min = 20, max = 100) String fullName,
+                    @Size(min = 10, max = 100) String fullName,
                     @Pattern(regexp = "(^$|[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$)"
                     , message = "email vd: admin@codegym.com") String email,
                     @Pattern(regexp ="(^$|[0][0-9]{9,10}$)",
                     message = "vd: 0868.868.686 ") String phone,
-                    @Size(min =1 , max = 255, message = "Address character 255") String address,
+                    String address,
                     long balance,
                     boolean isDelete,
                     LocalDateTime datetime) {

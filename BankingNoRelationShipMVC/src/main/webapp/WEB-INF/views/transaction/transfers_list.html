@@ -40,7 +40,7 @@
                     <td class="name_sender">
                         <th:block th:each="customer: ${customersList}">
                             <span th:if="${transfer.getIdSender() == customer.getId()}">
-                                <span th:text="${customer.getFullname()}"></span>
+                                <span th:text="${customer.getFullName()}"></span>
                             </span>
                         </th:block>
                     </td>

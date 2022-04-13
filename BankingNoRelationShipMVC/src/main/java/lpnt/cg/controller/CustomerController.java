@@ -45,9 +45,9 @@ public class CustomerController {
         String error = null;
         if (bindingResult.hasFieldErrors()) {
             List<ObjectError> errorList = bindingResult.getAllErrors();
-            error = "New customer create error " + "\n";
+            error = "New customer create error \n";
             for (int i = 0; i < errorList.size(); i++) {
-                error += "*" + errorList.get(i).getDefaultMessage() + "\n";
+                error += "***" + errorList.get(i).getDefaultMessage() + "\n";
             }
             modelAndView.addObject("error", error);
         }
@@ -57,9 +57,9 @@ public class CustomerController {
             modelAndView.addObject("message", "New Customer created successfully");
             return modelAndView;
         } catch (Exception e) {
-            modelAndView.addObject("error", error);
-            return modelAndView;
+            modelAndView.setViewName("/error");
         }
+        return modelAndView;
     }
 
     @GetMapping("/edit-customer/{id}")

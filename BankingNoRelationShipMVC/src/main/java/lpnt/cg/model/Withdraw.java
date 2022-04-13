@@ -1,6 +1,7 @@
 package lpnt.cg.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,6 +14,7 @@ public class Withdraw {
 
     private Long idOwner;
 
+    @Min(value = 1000, message = "Withdraw not min 1000$")
     private long amount;
 
     private boolean isDelete = false;
@@ -25,7 +27,8 @@ public class Withdraw {
         this.idOwner = idOwner;
     }
 
-    public Withdraw(Long id, Long idOwner, long amount, boolean isDelete, LocalDateTime dateTime) {
+    public Withdraw(Long id, Long idOwner,
+                    @Min(value = 1000, message = "Withdraw not min 1000$") long amount, boolean isDelete, LocalDateTime dateTime) {
         this.id = id;
         this.idOwner = idOwner;
         this.amount = amount;

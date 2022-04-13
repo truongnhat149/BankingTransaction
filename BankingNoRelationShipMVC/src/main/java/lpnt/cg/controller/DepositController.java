@@ -6,11 +6,16 @@ import lpnt.cg.service.customer.ICustomerService;
 import lpnt.cg.service.deposit.IDepositService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class DepositController {
@@ -30,7 +35,9 @@ public class DepositController {
         return modelAndView ;
     }
     @PostMapping("/deposits")
-    private ModelAndView saveDeposits(@ModelAttribute("deposits") Deposit deposits){
+    private ModelAndView saveDeposits(@Validated @ModelAttribute("deposits") Deposit deposits,
+                                      BindingResult bindingResult){
+
         Customer customer = customerService.findById(deposits.getIdOwner());
         long money_deposits = deposits.getAmount();
         boolean isMoney = false;
@@ -38,16 +45,30 @@ public class DepositController {
             isMoney = true;
         }
         ModelAndView modelAndView = new ModelAndView("/transaction/deposits");
-        if(isMoney){
-            depositService.save(deposits);
-            customer.setBalance(customer.getBalance()+ deposits.getAmount());
-            customerService.save(customer);
-            modelAndView.addObject("message", "Deposits successfully");
-        }else {
-            modelAndView.addObject("error","Deposits error !");
+        String error = null;
+        if (bindingResult.hasFieldErrors()) {
+            List<ObjectError> errorList = bindingResult.getAllErrors();
+            error = "Deposit error \n";
+            for (int i = 0; i < errorList.size(); i++) {
+                error += "***" + errorList.get(i).getDefaultMessage() + "\n";
+            }
+            modelAndView.addObject("error", error);
         }
-        modelAndView.addObject("deposits", new Deposit(deposits.getIdOwner()));
-        modelAndView.addObject("customer",customer);
+        try {
+            if(isMoney){
+                depositService.save(deposits);
+                customer.setBalance(customer.getBalance()+ deposits.getAmount());
+                customerService.save(customer);
+                modelAndView.addObject("message", "Deposits successfully");
+            }else {
+                modelAndView.addObject("error",error);
+            }
+            modelAndView.addObject("deposits", new Deposit(deposits.getIdOwner()));
+            modelAndView.addObject("customer",customer);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            modelAndView.addObject("error", error);
+        }
         return modelAndView ;
     }
 }
