@@ -30,6 +30,7 @@ public class Customer {
     @Pattern(regexp = "(^$|[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$)",
             message = "vd: admin@gmail.com")
     @Column(unique = true)
+    @NotEmpty()
     private String email;
 
     @Pattern(regexp = "(^$|[0][0-9]{9,10}$)",

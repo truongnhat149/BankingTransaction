@@ -1,7 +1,7 @@
 # BankingTransaction
 
 ## Các kiến thức + công nghệ
-- Bootstrap 
+- Bootstrap 5
 - Spring MVC
 - Spring jpa repository
 - Thymeleaf

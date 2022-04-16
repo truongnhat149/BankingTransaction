@@ -23,7 +23,7 @@ public class Withdraw {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
-    @Min(value = 1000, message = "Withdraw not min 1000$")
+    @Min(value = 1001, message = "Withdraw not min 1000$")
     @Max(value = 100000000000L, message = "Withdraw not max 100000000000$")
     private long amount;
 
@@ -40,7 +40,7 @@ public class Withdraw {
     public Withdraw() {}
 
     public Withdraw(Long id, Customer customer,
-                    @Min(value = 1000, message = "Withdraw not min 1000$")
+                    @Min(value = 1001, message = "Withdraw not min 1000$")
                     @Max(value = 100000000000L, message = "Withdraw not max 100000000000$")long amount, boolean isSuspended, LocalDateTime create_at, Long create_by, LocalDateTime update_at, Long update_by) {
         this.id = id;
         this.customer = customer;
@@ -53,7 +53,7 @@ public class Withdraw {
     }
 
     public Withdraw(Long id, Customer customer,
-                    @Min(value = 1000, message = "Withdraw not min 1000$")
+                    @Min(value = 1001, message = "Withdraw not min 1000$")
                     @Max(value = 100000000000L, message = "Withdraw not max 100000000000$")long amount, boolean isSuspended, LocalDateTime create_at) {
         this.id = id;
         this.customer = customer;

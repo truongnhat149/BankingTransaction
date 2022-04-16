@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Deposit money into customer's account
     </title>
-    <th:block th:replace="~{/layout/header-crud::head}"></th:block>
+    <th:block th:replace="~{/layout/header-crud :: head}"></th:block>
 </head>
 <body>
 <div class="container">
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <form th:object="${transfer}" method="post" th:href="@{/transfer/__${sender.id}__}">
+    <form th:object="${transfer}" method="post" th:href="@{/transfer/__${sender.id}__}" class="needs-validation" novalidate>
         <div class="row">
             <div class="col-md-3">
                 <label class="form-label">Sender ID</label>
@@ -43,17 +43,23 @@
                        th:value="${sender.getBalance()}" readonly>
             </div>
             <div class="col-md-3">
-                <label class="form-label">Recipient ID</label>
+                <label for="recipient" class="form-label">Recipient ID</label>
                 <select name="recipient" id="recipient" class="form-select">
                     <option th:value="${sender.id}" selected>Select Recipient ID</option>
+                    <!--/*@thymesVar id="id" type="java"*/-->
                     <option th:each="item : ${recipients}" th:value="${item.id}" th:text="'(' + ${item.id} + ') ' + ${item.fullName}"></option>
                 </select>
-
+                <div class="invalid-feedback">
+                    Please choose a Recipient ID.
+                </div>
             </div>
             <div class="col-md-3">
-                <label class="form-label">Transfer Amount(VND)</label>
+                <label for="transferAmount" class="form-label">Transfer Amount(VND)</label>
                 <input type="number" class="form-control" id="transferAmount" name="transferAmount"
                        th:field="*{transferAmount}" onkeyup="onChange()">
+                <div class="invalid-feedback">
+                    Please choose a transfer amount.
+                </div>
             </div>
             <div class="col-md-3">
                 <label class="form-label">Fees(%)</label>

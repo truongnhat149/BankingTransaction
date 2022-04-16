@@ -16,7 +16,7 @@ public class Deposit {
 
     private Long idOwner;
 
-    @Min(value = 1000, message = "Deposit not min 1000")
+    @Min(value = 1001, message = "Deposit not min 1000")
     @Max(value = 10000000000L, message = "Deposit not max 10000000000L")
     private long amount;
 
@@ -36,7 +36,7 @@ public class Deposit {
     }
 
     public Deposit(Long id, Long idOwner,
-                   @Min(value = 1000, message = "Deposit not min 1000")
+                   @Min(value = 1001, message = "Deposit not min 1000")
                    @Max(value = 10000000000L, message = "Deposit not max 10000000000L")long amount, boolean isDelete, LocalDateTime dateTime) {
         this.id = id;
         this.idOwner = idOwner;

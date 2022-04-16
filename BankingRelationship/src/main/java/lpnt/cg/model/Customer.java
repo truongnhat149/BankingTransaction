@@ -44,6 +44,7 @@ public class Customer {
 
     @Min(value = 0, message = "balance not 0")
     private long balance = 0;
+
     private boolean suspended = false;
     private LocalDateTime create_at = LocalDateTime.now();
 
@@ -61,9 +62,9 @@ public class Customer {
 
     public Customer( @NotEmpty(message = "Name not empty")
 //                     @Pattern(regexp = "\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+", message = "Name format not true, Ex example : Nguyễn Văn A")
-                     @Size(min=1 , max=45 ,message = "Full name description within 255 characters ! ")
+                     @Size(min=1 , max=60 ,message = "Full name description within 255 characters ! ")
                              String fullName,
-                     @Pattern(regexp = "^[a-z][a-z0-9_\\.]{3,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,7}){1,7}$" , message = "Mail not true, Ex: codegymhue2021@codegym.com")
+                     @Pattern(regexp = "^[a-z][a-z0-9_\\.]{3,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,7}){1,7}$" , message = "Mail not true, Ex: total@codegym.vn")
                      @NotEmpty(message = "email not empty")
                              String email,
                      @Pattern(regexp ="(^$|[0][0-9]{9,10}$)",message = "Formatter not true, phone number is have 10-11 character !" )

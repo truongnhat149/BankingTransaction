@@ -73,7 +73,7 @@ public class TransferController {
     private ModelAndView saveTransfers(@Validated @ModelAttribute("transfer") Transfer transfer,
                                       BindingResult bindingResult) {
 
-        long transaction_amount = transfer.getTransferAmount() / transfer.getFees();
+        long transaction_amount = transfer.getTransferAmount() / transfer.getFees() + transfer.getTransferAmount();
         transfer.setTransaction_amount(transaction_amount);
         Customer customer_sender = customerService.findById(transfer.getIdSender());
         Long id_sender = customer_sender.getId();

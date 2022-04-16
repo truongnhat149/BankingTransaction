@@ -49,8 +49,11 @@ public class WithdrawController {
         boolean isMoney = false;
         boolean isLimit = false;
 
-        if (moneyWithdraw > 1000 && moneyWithdraw <= customer.getBalance()) {
+        if (moneyWithdraw >= 1000) {
             isMoney = true;
+        }
+
+        if (moneyWithdraw <= customer.getBalance()) {
             isLimit = true;
         }
 
@@ -76,7 +79,7 @@ public class WithdrawController {
                 modelAndView.addObject("error", error);
             }
         } catch (Exception e) {
-            modelAndView.setViewName("/error");
+            modelAndView.addObject("error", error);
             System.out.println(e.getMessage());
         }
 

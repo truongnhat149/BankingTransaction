@@ -25,7 +25,7 @@ public class Deposit {
     private Customer customer;
 
 
-    @Min(value = 1000, message = "Amount not min 1000$")
+    @Min(value = 1001, message = "Amount not min 1000$")
     @Max(value = 10000000000L, message = "Amount not max 10000000000$")
     private long amount;
 
@@ -54,7 +54,7 @@ public class Deposit {
 
     public Deposit(Long id, Customer customer,
                    @NotEmpty(message = "Amount not empty")
-                   @Min(value = 1000, message = "Amount not min 1000$")
+                   @Min(value = 1001, message = "Amount not min 1000$")
                    @Max(value = 10000000000L, message = "Amount not max 10000000000$") long amount, boolean isSuspended, LocalDateTime create_at, Long create_by, LocalDateTime update_at, Long updated_by) {
         this.id = id;
         this.customer = customer;

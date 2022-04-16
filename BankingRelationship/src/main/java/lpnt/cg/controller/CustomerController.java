@@ -43,7 +43,7 @@ public class CustomerController {
 
     @PostMapping("/create-customer")
     public ModelAndView saveCustomer(@Validated  @ModelAttribute("customer") Customer customer,
-                                     BindingResult bindingResult){
+                                     BindingResult bindingResult) throws Exception{
         ModelAndView modelAndView = new ModelAndView("/customer/create");
         String error = null;
         if (bindingResult.hasFieldErrors()) {
@@ -57,14 +57,15 @@ public class CustomerController {
         try {
             customerService.save(customer);
             modelAndView.addObject("customer", new Customer());
-            modelAndView.addObject("error", error);
             modelAndView.addObject("message", "New customer created successfully");
             return modelAndView;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            modelAndView.addObject("customer", new Customer());
             modelAndView.addObject("error", error);
             return modelAndView;
         }
+
     }
 
     @GetMapping("/edit-customer/{id}")
@@ -82,7 +83,7 @@ public class CustomerController {
 
     @PostMapping("/edit-customer")
     public ModelAndView updateCustomer(@Validated @ModelAttribute("customer") Customer customer,
-                                       BindingResult bindingResult) {
+                                       BindingResult bindingResult) throws Exception{
         ModelAndView modelAndView = new ModelAndView("/customer/edit");
         String error = null;
         if (bindingResult.hasFieldErrors()) {
@@ -102,8 +103,8 @@ public class CustomerController {
             System.out.println(e.getMessage());
             modelAndView.addObject("error", error);
             modelAndView.addObject("customer", customer);
+            return modelAndView;
         }
-        return modelAndView;
     }
 
 

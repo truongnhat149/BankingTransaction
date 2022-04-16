@@ -57,7 +57,8 @@ public class CustomerController {
             modelAndView.addObject("message", "New Customer created successfully");
             return modelAndView;
         } catch (Exception e) {
-            modelAndView.setViewName("/error");
+            modelAndView.addObject("error", error);
+            modelAndView.addObject("customer", new Customer());
         }
         return modelAndView;
     }
@@ -69,7 +70,7 @@ public class CustomerController {
         if (customer != null) {
             ModelAndView modelAndView = new ModelAndView("/customer/edit");
             modelAndView.addObject("customer", customer);
-            modelAndView.addObject("message", "null");
+            modelAndView.addObject("message", null);
             return modelAndView;
         } else {
             ModelAndView modelAndView = new ModelAndView("/error");
@@ -78,11 +79,26 @@ public class CustomerController {
     }
 
     @PostMapping("/edit-customer")
-    public ModelAndView updateCustomer(@ModelAttribute Customer customer) {
+    public ModelAndView updateCustomer(@Validated @ModelAttribute Customer customer , BindingResult bindingResult) {
         customerService.save(customer);
         ModelAndView modelAndView = new ModelAndView("/customer/edit");
-        modelAndView.addObject("customer",customer);
-        modelAndView.addObject("message", "Customer update successfully");
+        String error = null;
+        if (bindingResult.hasFieldErrors()) {
+            List<ObjectError> errorList = bindingResult.getAllErrors();
+            error = "Edit customer error \n";
+            for (int i = 0; i < errorList.size(); i++) {
+                error += "***" + errorList.get(i).getDefaultMessage() + "\n";
+            }
+            modelAndView.addObject("error", error);
+        }
+        try {
+            modelAndView.addObject("customer",customer);
+            modelAndView.addObject("message", "Customer update successfully");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            modelAndView.addObject("customer",customer);
+            modelAndView.addObject("error",error);
+        }
         return modelAndView;
     }
 

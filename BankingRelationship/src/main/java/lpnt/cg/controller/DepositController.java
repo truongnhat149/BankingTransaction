@@ -52,13 +52,13 @@ public class DepositController {
 
         Customer customer = customerService.findById(customerId).get();
 
-//        long money_deposits = deposit.getAmount();
+        long money_deposits = deposit.getAmount();
 
-//        boolean isMoney = false;
-//
-//        if (money_deposits >= 1000 && money_deposits <= 1000000000) {
-//            isMoney = true;
-//        }
+        boolean isMoney = false;
+
+        if ((money_deposits >= 1000) && (money_deposits <= 1000000000)) {
+            isMoney = true;
+        }
 
 
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Deposit money into customer's account
     </title>
-    <th:block th:replace="~{/layout/header-crud :: head}" />
+    <th:block th:replace="~{/layout/header-crud ::head}"></th:block>
 </head>
 <body>
 <div class="container">
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <form th:action="@{/deposit/__${customer.id}__}" th:object="${deposit}" method="post">
+    <form th:action="@{/deposit/__${customer.id}__}" th:object="${deposit}" method="post" class="needs-validation" novalidate>
         <div class="row">
             <div class="col-md-6">
                 <label class="form-label">Customer ID</label>
@@ -38,9 +38,12 @@
                        th:value="${customer.balance}" readonly>
             </div>
             <div class="col-md-6">
-                <label class="form-label">Transaction Amount (VND)</label>
+                <label for="transferAmount" class="form-label">Transaction Amount (VND)</label>
                 <input type="number" class="form-control" id="transferAmount" name="transferAmount"
-                       value="0" th:field="*{amount}">
+                       value="1001" th:field="*{amount}">
+                <div class="invalid-feedback">
+                    Please choose a amount.
+                </div>
             </div>
 
             <div class="col-md-12">
