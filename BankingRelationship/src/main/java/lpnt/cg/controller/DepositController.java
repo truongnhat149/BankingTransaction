@@ -49,20 +49,38 @@ public class DepositController {
     private ModelAndView saveDeposits(@PathVariable Long customerId, @Validated @ModelAttribute("deposit") Deposit deposit,
                                       BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView("/transaction/deposit");
+        String error = null;
+
 
         Customer customer = customerService.findById(customerId).get();
 
         long money_deposits = deposit.getAmount();
 
-        boolean isMoney = false;
+        boolean isMoneyMin = false;
+        boolean isMoneyMax = false;
 
-        if ((money_deposits >= 1000) && (money_deposits <= 1000000000)) {
-            isMoney = true;
+        if ((money_deposits >= 1000)) {
+            isMoneyMin = true;
+        }else {
+            modelAndView.addObject("error", "Money deposit can not min 1000");
+        }
+        if ((money_deposits <= 1000000000)) {
+           isMoneyMax = true;
+        } else {
+            modelAndView.addObject("deposit",deposit);
+            modelAndView.addObject("error", "Money deposit can not max 1000000000");
+            return modelAndView;
+
         }
 
 
+        if (deposit.getAmount() % 10 != 0) {
+            modelAndView.addObject("deposit",deposit);
+            modelAndView.addObject("error", "Transaction must be a multiple of 10");
+            return modelAndView;
+        }
 
-        String error = null;
+
         if (bindingResult.hasFieldErrors()) {
             List<ObjectError> errorList = bindingResult.getAllErrors();
             error = "Deposit error \n";
@@ -72,7 +90,6 @@ public class DepositController {
             modelAndView.addObject("error", error);
         }
         try {
-//            if (isMoney) {
                 deposit.setCustomer(customer);
                 depositService.save(deposit);
                 customer.setBalance(customer.getBalance() + deposit.getAmount());
@@ -80,15 +97,11 @@ public class DepositController {
                 modelAndView.addObject("message", "Deposits successfully");
                 modelAndView.addObject("deposit", new Deposit());
                 modelAndView.addObject("customer", customer);
-//            }
-//            else {
-//            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             modelAndView.addObject("error", error);
             modelAndView.addObject("deposit", new Deposit());
             modelAndView.addObject("customer", customer);
-//            modelAndView.setViewName("/error");
         }
         return modelAndView;
     }
